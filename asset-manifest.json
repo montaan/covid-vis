@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.86a3f0fa.chunk.css",
-    "main.js": "/static/js/main.a6ac88ed.chunk.js",
-    "runtime~main.js": "/static/js/runtime~main.e0422c1d.js",
-    "static/css/2.3b0d0c3e.chunk.css": "/static/css/2.3b0d0c3e.chunk.css",
-    "static/js/2.283dd59a.chunk.js": "/static/js/2.283dd59a.chunk.js",
-    "8e49448fd8d06fabfadb.worker.js": "/8e49448fd8d06fabfadb.worker.js",
-    "index.html": "/index.html",
-    "precache-manifest.17e56c4aaa46533f7f28815bdfd40d91.js": "/precache-manifest.17e56c4aaa46533f7f28815bdfd40d91.js",
-    "service-worker.js": "/service-worker.js",
-    "static/media/Inconsolata-Regular.fnt": "/static/media/Inconsolata-Regular.bb6aa359.fnt",
-    "static/media/Inconsolata-Regular.png": "/static/media/Inconsolata-Regular.eef1a52f.png"
+    "main.css": "/covid-vis/static/css/main.86a3f0fa.chunk.css",
+    "main.js": "/covid-vis/static/js/main.4101af64.chunk.js",
+    "runtime~main.js": "/covid-vis/static/js/runtime~main.3460a7dd.js",
+    "static/css/2.3b0d0c3e.chunk.css": "/covid-vis/static/css/2.3b0d0c3e.chunk.css",
+    "static/js/2.283dd59a.chunk.js": "/covid-vis/static/js/2.283dd59a.chunk.js",
+    "d55c33b848afd88332e6.worker.js": "/covid-vis/d55c33b848afd88332e6.worker.js",
+    "index.html": "/covid-vis/index.html",
+    "precache-manifest.531c5e19b806cf1fdc4978a4926aef30.js": "/covid-vis/precache-manifest.531c5e19b806cf1fdc4978a4926aef30.js",
+    "service-worker.js": "/covid-vis/service-worker.js",
+    "static/media/Inconsolata-Regular.fnt": "/covid-vis/static/media/Inconsolata-Regular.bb6aa359.fnt",
+    "static/media/Inconsolata-Regular.png": "/covid-vis/static/media/Inconsolata-Regular.eef1a52f.png"
   }
 }
