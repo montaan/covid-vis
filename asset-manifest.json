@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/covid-vis/static/css/main.86a3f0fa.chunk.css",
-    "main.js": "/covid-vis/static/js/main.4101af64.chunk.js",
+    "main.js": "/covid-vis/static/js/main.333dc28d.chunk.js",
     "runtime~main.js": "/covid-vis/static/js/runtime~main.3460a7dd.js",
     "static/css/2.3b0d0c3e.chunk.css": "/covid-vis/static/css/2.3b0d0c3e.chunk.css",
-    "static/js/2.283dd59a.chunk.js": "/covid-vis/static/js/2.283dd59a.chunk.js",
+    "static/js/2.98804527.chunk.js": "/covid-vis/static/js/2.98804527.chunk.js",
     "d55c33b848afd88332e6.worker.js": "/covid-vis/d55c33b848afd88332e6.worker.js",
     "index.html": "/covid-vis/index.html",
-    "precache-manifest.531c5e19b806cf1fdc4978a4926aef30.js": "/covid-vis/precache-manifest.531c5e19b806cf1fdc4978a4926aef30.js",
+    "precache-manifest.89ca2b6d106d0f7e8a96f30e9a41e09b.js": "/covid-vis/precache-manifest.89ca2b6d106d0f7e8a96f30e9a41e09b.js",
     "service-worker.js": "/covid-vis/service-worker.js",
     "static/media/Inconsolata-Regular.fnt": "/covid-vis/static/media/Inconsolata-Regular.bb6aa359.fnt",
     "static/media/Inconsolata-Regular.png": "/covid-vis/static/media/Inconsolata-Regular.eef1a52f.png"

@@ -4,24 +4,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/covid-vis/d55c33b848afd88332e6.worker.js"
   },
   {
-    "revision": "60db15ddf47e284011872ec749b3a4e0",
+    "revision": "2ffda2f4be00a3eb7393c7c621af2180",
     "url": "/covid-vis/index.html"
   },
   {
-    "revision": "3ee522e20bb098166ccc",
+    "revision": "0a01ce8045907c646a75",
     "url": "/covid-vis/static/css/2.3b0d0c3e.chunk.css"
   },
   {
-    "revision": "ff3b27d7dc684cde35f1",
+    "revision": "a883a6ac5503c2ac6032",
     "url": "/covid-vis/static/css/main.86a3f0fa.chunk.css"
   },
   {
-    "revision": "3ee522e20bb098166ccc",
-    "url": "/covid-vis/static/js/2.283dd59a.chunk.js"
+    "revision": "0a01ce8045907c646a75",
+    "url": "/covid-vis/static/js/2.98804527.chunk.js"
   },
   {
-    "revision": "ff3b27d7dc684cde35f1",
-    "url": "/covid-vis/static/js/main.4101af64.chunk.js"
+    "revision": "a883a6ac5503c2ac6032",
+    "url": "/covid-vis/static/js/main.333dc28d.chunk.js"
   },
   {
     "revision": "ae4fa612d6953d968a2f",
