@@ -1,0 +1,198 @@
+.searchInput {
+	position: absolute;
+	left: 0;
+	top: 60px;
+	width: 108px;
+	font-size: 14px;
+	z-index: 20001;
+	border: 0;
+	height: 40px;
+	box-sizing: border-box;
+	padding: 6px;
+	padding-left: 12px;
+	padding-right: 12px;
+	border-radius: 2px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+	background: rgba(255, 255, 255, 0.9);
+	transition: 0.2s;
+
+	&:focus {
+		background: white;
+		width: 360px;
+		transition: 0.3s;
+	}
+}
+
+.searchResults {
+	position: absolute;
+	z-index: 10;
+	top: 94px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	bottom: 0px;
+	height: auto;
+	color: black;
+	background: white;
+	width: 316px;
+	transition: 0.3s;
+	right: -316px;
+	border-top-left-radius: 4px;
+
+	&.visible {
+		right: 0px;
+	}
+
+	:global(.close) {
+		left: 12px;
+		right: auto;
+	}
+
+	.resultType {
+		font-size: 18px;
+		color: black;
+		font-weight: bold;
+		background-color: #ddd;
+		padding-left: 8px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		margin-bottom: 1px;
+
+		cursor: pointer;
+
+		&.collapsed {
+			opacity: 0.2;
+		}
+	}
+
+	> ul {
+		position: absolute;
+
+		top: 84px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+
+		width: auto;
+		height: auto;
+
+		padding: 0;
+
+		border-top: 1px solid silver;
+
+		overflow-y: auto;
+	}
+
+	.searchInfo {
+		margin-top: 8px;
+		margin-right: 12px;
+		margin-bottom: 12px;
+		text-align: right;
+
+		h3 {
+			font-size: 18px;
+		}
+	}
+
+	.searchTitle {
+		display: none;
+		font-size: 16px;
+		text-align: left;
+	}
+	.searchSnippet {
+		font-size: 12px;
+		color: navy;
+		font-family: Source Sans, monospace;
+	}
+	.searchFullPath {
+		font-size: 12px;
+		text-align: left;
+	}
+
+	li {
+		margin: 0;
+		padding: 0;
+		padding-left: 8px;
+		padding-bottom: 8px;
+		border-bottom: 1px solid #ccc;
+		width: 100%;
+		word-wrap: break-word;
+		transition: 0.3s;
+		overflow: hidden;
+		height: auto;
+		cursor: pointer;
+	}
+
+	> ul > li {
+		&:not(.in-view) {
+			height: 0px;
+			padding: 0px;
+			white-space: nowrap;
+
+			> .searchTitle {
+				font-size: 10px;
+				display: inline;
+				vertical-align: top;
+			}
+			> .searchFullPath {
+				font-size: 10px;
+				display: inline;
+				vertical-align: top;
+				margin-left: 4px;
+			}
+		}
+
+		position: relative;
+
+		&.collapsed > ul {
+			display: none;
+		}
+
+		.collapseToggle {
+			position: absolute;
+			right: 4px;
+			top: 4px;
+			width: 10px;
+			height: 10px;
+			background-color: black;
+			color: #fafafa;
+
+			&:after {
+				content: 'V';
+				position: relative;
+				font-weight: bold;
+				top: -9px;
+				left: -1px;
+				font-size: 18px;
+			}
+		}
+		&.collapsed .collapseToggle {
+			opacity: 0.2;
+		}
+
+		> ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			.searchTitle {
+				display: block;
+				float: left;
+				margin-right: 4px;
+				font-size: 12px;
+				font-weight: normal;
+				font-family: Source Sans, monospace;
+			}
+			.searchFullPath {
+				display: none;
+			}
+			li {
+				padding-left: 8px;
+				border-bottom: 0;
+			}
+			li:last-child {
+				border-bottom: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,91 @@
+/* src/Montaan/Tour/Tour.module.css */
+@import '../../css/partials/variables';
+@import '../../css/partials/mixins';
+
+.Tour {
+	position: absolute;
+	top: 48px;
+	right: 0px;
+	width: 500px;
+	border: 0;
+	box-sizing: border-box;
+	padding: 12px;
+	padding-top: 12px;
+	border-radius: 2px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+	background: rgba(255, 255, 255, 0.9);
+	color: black;
+	text-align: left;
+
+	button {
+		margin-right: 8px;
+	}
+
+	p {
+		font-family: $regular;
+	}
+
+	a {
+		color: #335599;
+	}
+
+	.TourControls {
+		position: absolute;
+		right: 48px;
+		text-align: right;
+	}
+
+	.TOCTitle {
+		font-size: 14px;
+		margin: 0px;
+		margin-top: 12px;
+		margin-bottom: 18px;
+		cursor: pointer;
+		text-transform: uppercase;
+
+		&:before {
+			content: '▶︎';
+			display: inline-block;
+			transform-origin: 40% 40%;
+			margin-right: 8px;
+			transition: 0.1s;
+		}
+
+		&.open:before {
+			transform: rotate(90deg);
+			transition: 0.2s;
+		}
+	}
+
+	.TourPage {
+		position: absolute;
+		right: 12px;
+		bottom: 12px;
+		font-size: 12px;
+		text-transform: uppercase;
+
+		.TourName {
+			margin-right: 6px;
+		}
+	}
+
+	.TOC {
+		cursor: pointer;
+		max-height: 400px;
+		overflow: auto;
+		transition: 0.3s;
+		margin: 0;
+		margin-bottom: 12px;
+
+		&.closed {
+			max-height: 0;
+			margin-bottom: 0px;
+			overflow: hidden;
+			transition: 0.2s;
+		}
+
+		.current {
+			font-weight: bold;
+		}
+	}
+}

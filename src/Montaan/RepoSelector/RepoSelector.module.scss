@@ -1,0 +1,30 @@
+/* src/components/RepoSelector/RepoSelector.module.css */
+@import '../../css/partials/variables';
+@import '../../css/partials/mixins';
+
+.RepoSelector {
+	position: absolute;
+	z-index: 1001;
+	top: 10px;
+	right: 10px;
+	width: 300px;
+	text-align: right;
+	color: black;
+
+	form {
+		background: white;
+		padding: 10px;
+		text-align: center;
+		border-radius: 0px 4px 4px 4px;
+	}
+
+	.repoList {
+		width: 440px;
+		max-height: 80vh;
+		overflow-y: auto;
+		overflow-x: hidden;
+		a {
+			white-space: normal;
+		}
+	}
+}
