@@ -18,8 +18,8 @@ yarn start
 
 ## Add more
 
-Copy [src/examples/Sweden](src/examples/Sweden) if you have just top-level regions,
-or [src/examples/Portugal](src/examples/Portugal) if you have a deeper regional hierarchy.
+Copy [Sweden](https://github.com/montaan/covid-vis/tree/master/src/examples/SwedenCOVIDTree) if you have just top-level regions,
+or [Portugal](https://github.com/montaan/covid-vis/tree/master/src/examples/PortugalCOVIDTree) if you have a deeper regional hierarchy.
 
 ## License
 
