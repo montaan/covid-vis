@@ -6,8 +6,9 @@ Viewable online at https://montaan.github.io/covid-vis/
 
 ## Countries
 
-* Portugal
-* Sweden
+* Portugal, date range 2020-03-03 - 2020-04-21
+* Sweden, date range 2020-02-04 - 2020-04-21
+* Finland, date range 2020-04-21
 
 ## Start dev server
 
@@ -16,10 +17,10 @@ yarn
 yarn start
 ```
 
-## Add more
+## Add more data
 
-Copy [Sweden](https://github.com/montaan/covid-vis/tree/master/src/examples/SwedenCOVIDTree) if you have just top-level regions,
-or [Portugal](https://github.com/montaan/covid-vis/tree/master/src/examples/PortugalCOVIDTree) if you have a deeper regional hierarchy.
+Copy [Finland](https://github.com/montaan/covid-vis/tree/master/src/data/Finland) if you have just top-level regions,
+or [Portugal](https://github.com/montaan/covid-vis/tree/master/src/data/Portugal) if you have a deeper regional hierarchy.
 
 ## License
 

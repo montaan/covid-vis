@@ -1,170 +1,172 @@
 // Source https://covid19.min-saude.pt/
 
-const rawPortugalCOVIDCases: { [date: string]: string | Map<string, number> } = {
-	'2020-3-3': new Map([
-		['Porto', 2],
-		['Lisboa', 1],
-		['Coimbra', 1],
-	]),
+const rawPortugalCOVIDCases: {
+  [date: string]: string | Map<string, number>;
+} = {
+  "2020-3-3": new Map([
+    ["Porto", 2],
+    ["Lisboa", 1],
+    ["Coimbra", 1]
+  ]),
 
-	'2020-3-4': new Map([
-		['Porto', 3],
-		['Lisboa', 2],
-		['Coimbra', 1],
-	]),
+  "2020-3-4": new Map([
+    ["Porto", 3],
+    ["Lisboa", 2],
+    ["Coimbra", 1]
+  ]),
 
-	'2020-3-5': new Map([
-		['Porto', 5],
-		['Lisboa', 3],
-		['Coimbra', 1],
-	]),
+  "2020-3-5": new Map([
+    ["Porto", 5],
+    ["Lisboa", 3],
+    ["Coimbra", 1]
+  ]),
 
-	'2020-3-6': new Map([
-		['Porto', 8],
-		['Lisboa', 4],
-		['Coimbra', 1],
-	]),
+  "2020-3-6": new Map([
+    ["Porto", 8],
+    ["Lisboa", 4],
+    ["Coimbra", 1]
+  ]),
 
-	'2020-3-7': new Map([
-		['Porto', 15],
-		['Lisboa', 5],
-		['Coimbra', 1],
-	]),
+  "2020-3-7": new Map([
+    ["Porto", 15],
+    ["Lisboa", 5],
+    ["Coimbra", 1]
+  ]),
 
-	'2020-3-8': new Map([
-		['Porto', 22],
-		['Lisboa', 6],
-		['Coimbra', 1],
-		['Albufeira', 1],
-	]),
+  "2020-3-8": new Map([
+    ["Porto", 22],
+    ["Lisboa", 6],
+    ["Coimbra", 1],
+    ["Albufeira", 1]
+  ]),
 
-	'2020-3-9': new Map([
-		['Porto', 27],
-		['Lisboa', 9],
-		['Coimbra', 1],
-		['Albufeira', 2],
-	]),
+  "2020-3-9": new Map([
+    ["Porto", 27],
+    ["Lisboa", 9],
+    ["Coimbra", 1],
+    ["Albufeira", 2]
+  ]),
 
-	'2020-3-10': new Map([
-		['Porto', 27],
-		['Lisboa', 10],
-		['Coimbra', 2],
-		['Albufeira', 2],
-	]),
+  "2020-3-10": new Map([
+    ["Porto", 27],
+    ["Lisboa", 10],
+    ["Coimbra", 2],
+    ["Albufeira", 2]
+  ]),
 
-	'2020-3-11': new Map([
-		['Porto', 36],
-		['Lisboa', 17],
-		['Coimbra', 3],
-		['Albufeira', 3],
-	]),
+  "2020-3-11": new Map([
+    ["Porto", 36],
+    ["Lisboa", 17],
+    ["Coimbra", 3],
+    ["Albufeira", 3]
+  ]),
 
-	'2020-3-12': new Map([
-		['Porto', 44],
-		['Lisboa', 23],
-		['Coimbra', 5],
-		['Albufeira', 5],
-	]),
+  "2020-3-12": new Map([
+    ["Porto", 44],
+    ["Lisboa", 23],
+    ["Coimbra", 5],
+    ["Albufeira", 5]
+  ]),
 
-	'2020-3-13': new Map([
-		['Porto', 53],
-		['Lisboa', 46],
-		['Coimbra', 6],
-		['Albufeira', 6],
-	]),
+  "2020-3-13": new Map([
+    ["Porto", 53],
+    ["Lisboa", 46],
+    ["Coimbra", 6],
+    ["Albufeira", 6]
+  ]),
 
-	'2020-3-14': new Map([
-		['Porto', 77],
-		['Lisboa', 73],
-		['Coimbra', 8],
-		['Albufeira', 7],
-	]),
+  "2020-3-14": new Map([
+    ["Porto", 77],
+    ["Lisboa", 73],
+    ["Coimbra", 8],
+    ["Albufeira", 7]
+  ]),
 
-	'2020-3-15': new Map([
-		['Porto', 103],
-		['Lisboa', 116],
-		['Coimbra', 10],
-		['Albufeira', 10],
-		['Velas', 1],
-	]),
+  "2020-3-15": new Map([
+    ["Porto", 103],
+    ["Lisboa", 116],
+    ["Coimbra", 10],
+    ["Albufeira", 10],
+    ["Velas", 1]
+  ]),
 
-	'2020-3-16': new Map([
-		['Porto', 138],
-		['Lisboa', 142],
-		['Coimbra', 31],
-		['Albufeira', 13],
-		['Velas', 1],
-	]),
+  "2020-3-16": new Map([
+    ["Porto", 138],
+    ["Lisboa", 142],
+    ["Coimbra", 31],
+    ["Albufeira", 13],
+    ["Velas", 1]
+  ]),
 
-	'2020-3-17': new Map([
-		['Porto', 196],
-		['Lisboa', 180],
-		['Coimbra', 51],
-		['Albufeira', 14],
-		['Velas', 1],
-	]),
+  "2020-3-17": new Map([
+    ["Porto", 196],
+    ["Lisboa", 180],
+    ["Coimbra", 51],
+    ["Albufeira", 14],
+    ["Velas", 1]
+  ]),
 
-	'2020-3-18': new Map([
-		['Porto', 289],
-		['Lisboa', 243],
-		['Coimbra', 74],
-		['Albufeira', 21],
-		['Alentejo', 2],
-		['Velas', 3],
-		['Madeira', 1],
-	]),
+  "2020-3-18": new Map([
+    ["Porto", 289],
+    ["Lisboa", 243],
+    ["Coimbra", 74],
+    ["Albufeira", 21],
+    ["Alentejo", 2],
+    ["Velas", 3],
+    ["Madeira", 1]
+  ]),
 
-	'2020-3-19': new Map([
-		['Porto', 381],
-		['Coimbra', 86],
-		['Lisboa', 278],
-		['Alentejo', 2],
-		['Albufeira', 25],
-		['Velas', 3],
-		['Madeira', 1],
-	]),
+  "2020-3-19": new Map([
+    ["Porto", 381],
+    ["Coimbra", 86],
+    ["Lisboa", 278],
+    ["Alentejo", 2],
+    ["Albufeira", 25],
+    ["Velas", 3],
+    ["Madeira", 1]
+  ]),
 
-	'2020-3-20': new Map([
-		['Porto', 506],
-		['Coimbra', 106],
-		['Lisboa', 364],
-		['Alentejo', 2],
-		['Albufeira', 29],
-		['Velas', 3],
-		['Madeira', 1],
-	]),
+  "2020-3-20": new Map([
+    ["Porto", 506],
+    ["Coimbra", 106],
+    ["Lisboa", 364],
+    ["Alentejo", 2],
+    ["Albufeira", 29],
+    ["Velas", 3],
+    ["Madeira", 1]
+  ]),
 
-	'2020-3-21': new Map([
-		['Porto', 644],
-		['Coimbra', 137],
-		['Lisboa', 448],
-		['Alentejo', 3],
-		['Albufeira', 31],
-		['Velas', 3],
-		['Madeira', 5],
-	]),
+  "2020-3-21": new Map([
+    ["Porto", 644],
+    ["Coimbra", 137],
+    ["Lisboa", 448],
+    ["Alentejo", 3],
+    ["Albufeira", 31],
+    ["Velas", 3],
+    ["Madeira", 5]
+  ]),
 
-	'2020-3-22': new Map([
-		['Porto', 825],
-		['Coimbra', 180],
-		['Lisboa', 534],
-		['Alentejo', 5],
-		['Albufeira', 35],
-		['Velas', 4],
-		['Madeira', 7],
-	]),
+  "2020-3-22": new Map([
+    ["Porto", 825],
+    ["Coimbra", 180],
+    ["Lisboa", 534],
+    ["Alentejo", 5],
+    ["Albufeira", 35],
+    ["Velas", 4],
+    ["Madeira", 7]
+  ]),
 
-	'2020-3-23': new Map([
-		['Porto', 1007],
-		['Coimbra', 238],
-		['Lisboa', 737],
-		['Alentejo', 5],
-		['Albufeira', 42],
-		['Velas', 11],
-		['Madeira', 9],
-	]),
+  "2020-3-23": new Map([
+    ["Porto", 1007],
+    ["Coimbra", 238],
+    ["Lisboa", 737],
+    ["Alentejo", 5],
+    ["Albufeira", 42],
+    ["Velas", 11],
+    ["Madeira", 9]
+  ]),
 
-	'2020-3-24': `CONCELHO NÚMERO DE
+  "2020-3-24": `CONCELHO NÚMERO DE
 CASOS
 Lisboa 175
 Porto 126
@@ -235,7 +237,7 @@ Silves 3
 Soure 3
 Vale de Cambra 3
 `,
-	'2020-3-25': `CONCELHO NÚMERO DE CASOS
+  "2020-3-25": `CONCELHO NÚMERO DE CASOS
 	Lisboa 187
 	Porto 137
 	Maia 119
@@ -307,7 +309,7 @@ Vale de Cambra 3
 	Soure 3
 	`,
 
-	'2020-3-26': `CONCELHO NÚMERO DE
+  "2020-3-26": `CONCELHO NÚMERO DE
 	CASOS
 	Lisboa 284
 	Porto 259
@@ -415,7 +417,7 @@ Vila Real de
 Santo António 3
 	`,
 
-	'2020-3-27': `
+  "2020-3-27": `
 	CONCELHO NÚMERO DE
 CASOS
 Porto 317
@@ -533,7 +535,7 @@ Ilha do Pico 3
 Ourém 3
 	`,
 
-	'2020-3-28': `
+  "2020-3-28": `
 	Lisboa 366
 Porto 343
 Vila Nova de Gaia 262
@@ -656,7 +658,7 @@ Torres Novas 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-3-29': `
+  "2020-3-29": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 594
@@ -801,7 +803,7 @@ Vila Pouca de Aguiar 3
 Vimioso 3
 	`,
 
-	'2020-3-30': `
+  "2020-3-30": `
 	CONCELHO NÚMERO DE
 CASOS
 Porto 941
@@ -964,7 +966,7 @@ Vieira do Minho 3
 Torre de Moncorvo 3
 	`,
 
-	'2020-3-31': `
+  "2020-3-31": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 505
@@ -1116,7 +1118,7 @@ Olhão 3
 Figueira da Foz 3
 	`,
 
-	'2020-4-1': `
+  "2020-4-1": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 546
@@ -1271,7 +1273,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-2': `
+  "2020-4-2": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 594
@@ -1432,7 +1434,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-3': `
+  "2020-4-3": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 634
@@ -1598,7 +1600,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-4': `
+  "2020-4-4": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 654
@@ -1765,7 +1767,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-5': `
+  "2020-4-5": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 681
@@ -1938,7 +1940,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-6': `
+  "2020-4-6": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 699
@@ -2114,7 +2116,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-7': `
+  "2020-4-7": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 754
@@ -2291,7 +2293,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-8': `
+  "2020-4-8": `
 	CONCELHO NÚMERO DE
 CASOS
 Lisboa 773
@@ -2472,7 +2474,7 @@ Vila Nova de Poiares 3
 Vila Pouca de Aguiar 3
 	`,
 
-	'2020-4-9': `
+  "2020-4-9": `
 	CONCELHO NÚMERO DE
 CASOS
 Abrantes 3
@@ -2683,7 +2685,7 @@ Viseu 55
 Vizela 19
 	`,
 
-	'2020-4-10': `
+  "2020-4-10": `
 	CONCELHO NÚMERO DE
 CASOS
 Abrantes 4
@@ -2892,7 +2894,7 @@ Viseu 62
 Vizela 20
 	`,
 
-	'2020-4-11': `
+  "2020-4-11": `
 	CONCELHO NÚMERO DE
 CASOS
 Abrantes 4
@@ -3098,7 +3100,7 @@ Viseu 65
 Vizela 21
 	`,
 
-	'2020-4-12': `
+  "2020-4-12": `
 	CONCELHO NÚMERO DE
 CASOS
 Abrantes 4
@@ -3308,7 +3310,7 @@ Viseu 68
 Vizela 23
 	`,
 
-	'2020-4-13': `
+  "2020-4-13": `
 	CONCELHO NÚMERO DE
 CASOS
 Abrantes 4
@@ -3517,7 +3519,7 @@ Viseu 69
 Vizela 26
 	`,
 
-	'2020-4-14': `
+  "2020-4-14": `
 	CONCELHO NÚMERO DE
 	CASOS
 	Abrantes 4
@@ -3736,7 +3738,7 @@ Vizela 26
 	Vizela 26
 	`,
 
-	'2020-4-15': `
+  "2020-4-15": `
 	CONCELHO NÚMERO
 	DE CASOS
 	Abrantes 4
@@ -3952,7 +3954,7 @@ Vizela 26
 	Vizela 25
 	`,
 
-	'2020-4-16': `
+  "2020-4-16": `
 	CONCELHO NÚMERO
 DE CASOS
 Abrantes 5
@@ -4173,7 +4175,7 @@ Vizela 32
 Vouzela 3
 `,
 
-	'2020-4-17': `
+  "2020-4-17": `
 	CONCELHO NÚMERO
 DE CASOS
 Abrantes 7
@@ -4400,7 +4402,7 @@ Vizela 34
 Vouzela 4
 `,
 
-	'2020-04-18': `CONCELHO NÚMERO
+  "2020-04-18": `CONCELHO NÚMERO
 DE CASOS
 Abrantes 7
 Águeda 41
@@ -4622,7 +4624,7 @@ Vinhais 18
 Viseu 72
 Vizela 52
 Vouzela 4`,
-	'2020-04-19': `CONCELHO NÚMERO
+  "2020-04-19": `CONCELHO NÚMERO
 DE CASOS
 Abrantes 7
 Águeda 42
@@ -4847,7 +4849,7 @@ Vinhais 23
 Viseu 74
 Vizela 53
 Vouzela 5`,
-	'2020-04-20': `CONCELHO NÚMERO
+  "2020-04-20": `CONCELHO NÚMERO
 DE CASOS
 Abrantes 7
 Águeda 42
@@ -5070,7 +5072,7 @@ Vinhais 23
 Viseu 75
 Vizela 53
 Vouzela 5`,
-	'2020-04-21': `CONCELHO NÚMERO
+  "2020-04-21": `CONCELHO NÚMERO
 DE CASOS
 Abrantes 7
 Águeda 40
@@ -5294,36 +5296,36 @@ Vimioso 7
 Vinhais 24
 Viseu 79
 Vizela 60
-Vouzela 5`,
+Vouzela 5`
 };
 
 const lauMappings: { [name: string]: string } = {};
 
 function parseCases(cases: Map<string, number> | string): Map<string, number> {
-	if (typeof cases !== 'string') return cases;
-	const caseMap = new Map<string, number>();
-	const lines = cases.split('\n');
-	let name = '';
-	for (let i = 0; i < lines.length; i++) {
-		const line = lines[i].trim();
-		if (line.length === 0) continue;
-		if (/^(DE|NÚMERO|CASOS|CONCELHO)/.test(line)) continue;
-		const match = line.match(/\d+$/);
-		if (match) {
-			const number = parseInt(match[0]);
-			name = name + line.slice(0, -match[0].length - 1);
-			name = lauMappings[name] ?? name;
-			caseMap.set(name, (caseMap.get(name) ?? 0) + number);
-			name = '';
-		} else {
-			name += line + ' ';
-		}
-	}
-	return caseMap;
+  if (typeof cases !== "string") return cases;
+  const caseMap = new Map<string, number>();
+  const lines = cases.split("\n");
+  let name = "";
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.length === 0) continue;
+    if (/^(DE|NÚMERO|CASOS|CONCELHO)/.test(line)) continue;
+    const match = line.match(/\d+$/);
+    if (match) {
+      const number = parseInt(match[0]);
+      name = name + line.slice(0, -match[0].length - 1);
+      name = lauMappings[name] ?? name;
+      caseMap.set(name, (caseMap.get(name) ?? 0) + number);
+      name = "";
+    } else {
+      name += line + " ";
+    }
+  }
+  return caseMap;
 }
 
 export const PortugalCOVIDCases = new Map();
 
 for (let date in rawPortugalCOVIDCases) {
-	PortugalCOVIDCases.set(date, parseCases(rawPortugalCOVIDCases[date as any]));
+  PortugalCOVIDCases.set(date, parseCases(rawPortugalCOVIDCases[date as any]));
 }

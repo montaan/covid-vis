@@ -9,12 +9,12 @@ import {
   FSEntry,
   getPathEntry
 } from "../../Montaan/Filesystems";
-import { SwedenCOVIDCases, SwedenRegions } from "./SwedenCOVIDCases";
-
+import { PortugalCOVIDCases } from "./PortugalCOVIDCases";
+import { getNUTSName } from "./NUTS";
 import { TreeLink, FSState } from "../../Montaan/MainApp";
 import Button from "react-bootstrap/Button";
 import utils from "../../Montaan/Utils/utils";
-
+import { PortugalConcelhos } from "./PortugalConcelhos";
 import Form from "react-bootstrap/Form";
 
 class CasesFilesystem extends Filesystem {
@@ -26,7 +26,7 @@ class CasesFilesystem extends Filesystem {
   constructor(mountPoint: FSEntry) {
     super(undefined);
     this.mountPoint = mountPoint;
-    this.dates = Array.from(SwedenCOVIDCases.keys());
+    this.dates = Array.from(PortugalCOVIDCases.keys());
     this.currentDate = this.dates[this.dates.length - 1];
     this.trees = new Map();
     // this.dates.forEach((d) => this.trees.set(d, this.getDayTree(d)));
@@ -43,7 +43,7 @@ class CasesFilesystem extends Filesystem {
   onClick = () => {
     this.graphVisible = !this.graphVisible;
     if (this.graphVisible) {
-      this.setLinks(SwedenCOVIDCaseLinks);
+      this.setLinks(PortugalCOVIDCaseLinks);
     } else {
       this.setLinks([]);
     }
@@ -53,78 +53,82 @@ class CasesFilesystem extends Filesystem {
 
   getDayTree(date: string) {
     const tree = new FSDirEntry("");
-    const cases = SwedenCOVIDCases.get(date);
-    if (!cases) return tree;
-    const dayCases = new Map<string, { cases: number; deaths: number }>(
-      cases.entries()
+    const dayCases = new Map<string, number>(
+      PortugalCOVIDCases.get(date).entries()
     );
     const caseList: string[] = [];
     let populationCounter = 0;
     const populationBlockSize = 1000;
-    for (let region of SwedenRegions.entries()) {
-      const lauName = region[0];
-      const population = region[1];
-      const countryEntry = getOrCreateDir(tree, "Sweden");
-      const covidCounts = dayCases.get(lauName);
-      let covidCount = covidCounts ? covidCounts.cases : 0;
-      if (covidCount > population) {
-        throw new Error("More cases than people");
-      }
-      if (covidCount > 0) {
-        dayCases.delete(lauName);
-      }
-      const lauEntry = createDir(countryEntry, lauName.replace(/\//g, "|"));
-      if (lauEntry.lastIndex < 0) lauEntry.lastIndex = 0;
-      if (countryEntry.lastIndex < 0) countryEntry.lastIndex = 0;
-      lauEntry.lastIndex += covidCount;
-      countryEntry.lastIndex += covidCount;
-      lauEntry.color = [
-        (lauEntry.lastIndex > 0 ? 0.1 : 0) +
-          Math.min(0.4, (1000 * lauEntry.lastIndex) / population),
-        lauEntry.lastIndex <= 0
-          ? 0.2
-          : 0 +
-            Math.max(
-              0,
-              Math.min(0.4, 1 - (1000 * lauEntry.lastIndex) / population)
-            ),
-        0.0
-      ];
-      for (let i = 0; i < population; i += populationBlockSize) {
-        const populationEntry = createDir(lauEntry, i.toString());
-        populationEntry.color = [
-          (covidCount > 0 ? 0.2 : 0) +
-            0.5 * Math.min(populationBlockSize, covidCount) * 0.01,
-          0.0,
+    PortugalConcelhos.forEach(
+      ([nuts, lau, lauName, lauNameLatin, change, populationString]) => {
+        const population = parseInt(populationString);
+        const nuts1Entry = getOrCreateDir(tree, getNUTSName(nuts, 1));
+        const nuts2Entry = getOrCreateDir(nuts1Entry, getNUTSName(nuts, 2));
+        let covidCount = dayCases.get(lauName) ?? 0;
+        if (covidCount > population) {
+          throw new Error("More cases than people");
+        }
+        if (covidCount > 0) {
+          dayCases.delete(lauName);
+        }
+        const nuts3Entry = getOrCreateDir(nuts2Entry, getNUTSName(nuts, 3));
+        const lauEntry = createDir(nuts3Entry, lauName.replace(/\//g, "|"));
+        if (lauEntry.lastIndex < 0) lauEntry.lastIndex = 0;
+        if (nuts3Entry.lastIndex < 0) nuts3Entry.lastIndex = 0;
+        if (nuts2Entry.lastIndex < 0) nuts2Entry.lastIndex = 0;
+        if (nuts1Entry.lastIndex < 0) nuts1Entry.lastIndex = 0;
+        lauEntry.lastIndex += covidCount;
+        nuts3Entry.lastIndex += covidCount;
+        nuts2Entry.lastIndex += covidCount;
+        nuts1Entry.lastIndex += covidCount;
+        lauEntry.color = [
+          (lauEntry.lastIndex > 0 ? 0.1 : 0) +
+            Math.min(0.4, lauEntry.lastIndex / 500),
+          lauEntry.lastIndex <= 0 ? 0.2 : 0,
           0.0
         ];
-        populationEntry.filesystem = new PeopleFilesystem(
-          populationCounter,
-          Math.min(populationBlockSize, population - i),
-          covidCount
-        );
-        populationEntry.filesystem.mountPoint = populationEntry;
-        // addCasesToCaseList(
-        // 	caseList,
-        // 	getFullPath(populationEntry),
-        // 	populationCounter,
-        // 	Math.min(populationBlockSize, covidCount)
-        // );
-        covidCount -= populationBlockSize;
-        covidCount = Math.max(0, covidCount);
+        nuts3Entry.color = [
+          (nuts3Entry.lastIndex > 0 ? 0.2 : 0) +
+            Math.min(0.4, nuts3Entry.lastIndex / 1000),
+          Math.min(0.25, nuts3Entry.lastIndex / 1000),
+          0
+        ];
+        for (let i = 0; i < population; i += populationBlockSize) {
+          const populationEntry = createDir(lauEntry, i.toString());
+          populationEntry.color = [
+            (covidCount > 0 ? 0.2 : 0) +
+              0.5 * Math.min(populationBlockSize, covidCount) * 0.01,
+            0.0,
+            0.0
+          ];
+          populationEntry.filesystem = new PeopleFilesystem(
+            populationCounter,
+            Math.min(populationBlockSize, population - i),
+            covidCount
+          );
+          populationEntry.filesystem.mountPoint = populationEntry;
+          // addCasesToCaseList(
+          // 	caseList,
+          // 	getFullPath(populationEntry),
+          // 	populationCounter,
+          // 	Math.min(populationBlockSize, covidCount)
+          // );
+          covidCount -= populationBlockSize;
+          covidCount = Math.max(0, covidCount);
 
-        populationCounter += Math.min(populationBlockSize, population - i);
+          populationCounter += Math.min(populationBlockSize, population - i);
+        }
       }
-    }
+    );
     utils.traverseFSEntry(
       tree,
       fsEntry => (fsEntry.fetched = fsEntry.filesystem === undefined),
       ""
     );
-    // SwedenCOVIDCaseLinks.splice(0);
+    // PortugalCOVIDCaseLinks.splice(0);
     // const caseLinks = convertCaseListToLinks(caseList);
     // for (let i = 0; i < caseLinks.length; i++) {
-    // 	SwedenCOVIDCaseLinks.push(caseLinks[i]);
+    // 	PortugalCOVIDCaseLinks.push(caseLinks[i]);
     // }
     return tree;
   }
@@ -319,8 +323,8 @@ function convertCaseListToLinks(caseList: string[]): TreeLink[] {
   return links;
 }
 
-const tree = new FSDirEntry("");
+const tree = new FSDirEntry("Portugal");
 tree.filesystem = new CasesFilesystem(tree);
 tree.fetched = true;
-export const SwedenCOVIDCaseLinks: TreeLink[] = [];
-export const SwedenCOVIDTree = tree;
+export const PortugalCOVIDCaseLinks: TreeLink[] = [];
+export const PortugalCOVIDTree = tree;

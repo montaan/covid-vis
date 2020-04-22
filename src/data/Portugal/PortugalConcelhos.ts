@@ -1,4 +1,4 @@
-import { PortugalLAUs } from './PortugalLAUs';
+import { PortugalLAUs } from "./PortugalLAUs";
 
 const rawConcelhos = `PT111 Minho-Lima 1601 Arcos de Valdevez 1780 881 899 1801 1079 722
 PT111 Minho-Lima 1602 Caminha 1197 698 499 2667 1484 1183
@@ -310,17 +310,19 @@ PT300 Região Autónoma da Madeira 3110 São Vicente 494 294 200 619 338 281
 PT300 Região Autónoma da Madeira 3201 Porto Santo 114 80 34 184 95 89`;
 
 export const PortugalConcelhos = rawConcelhos
-	.split('\n')
-	.map((line) => {
-		const match = line.match(/^(\S+) (.+) (\d{4}) (.+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+)$/);
-		if (match) {
-			const cod = match[3];
-			const concelho = match[4];
-			const LAUs = PortugalLAUs.filter((lau) => lau[1].startsWith(cod));
-			const nuts3 = LAUs[0][0];
-			const population = LAUs.reduce((s, lau) => s + parseInt(lau[5]), 0);
-			return [nuts3, cod, concelho, '', '', population.toString()];
-		}
-		return undefined;
-	})
-	.filter((s) => s !== undefined) as string[][];
+  .split("\n")
+  .map(line => {
+    const match = line.match(
+      /^(\S+) (.+) (\d{4}) (.+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+)$/
+    );
+    if (match) {
+      const cod = match[3];
+      const concelho = match[4];
+      const LAUs = PortugalLAUs.filter(lau => lau[1].startsWith(cod));
+      const nuts3 = LAUs[0][0];
+      const population = LAUs.reduce((s, lau) => s + parseInt(lau[5]), 0);
+      return [nuts3, cod, concelho, "", "", population.toString()];
+    }
+    return undefined;
+  })
+  .filter(s => s !== undefined) as string[][];
