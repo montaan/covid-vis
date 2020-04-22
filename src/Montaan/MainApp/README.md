@@ -17,10 +17,10 @@ This is the description of the MainApp component's MainAppProps interface.
 
 ```tsx
 export interface MainAppProps extends RouteComponentProps {
-	match: any;
-	userInfo: UserInfo;
-	api: QFrameAPI;
-	apiPrefix: string;
+  match: any;
+  userInfo: UserInfo;
+  api: QFrameAPI;
+  apiPrefix: string;
 }
 ```
 
@@ -32,24 +32,24 @@ Example of using the stylesheet:
 
 ```css
 .MainApp {
-	display: inline-block;
+  display: inline-block;
 
-	:global(.hidden) {
-		display: block;
-		opacity: 0.1;
-	}
+  :global(.hidden) {
+    display: block;
+    opacity: 0.1;
+  }
 }
 .title {
-	color: red;
+  color: red;
 }
 ```
 
 ```tsx
 <div className={this.styles.MainApp}>
-	<h1 className={this.styles.title}>Hello from {this.styles.title}!</h1>
-	<p className="hidden">
-		This P is using the global class <code>.hidden</code>
-	</p>
+  <h1 className={this.styles.title}>Hello from {this.styles.title}!</h1>
+  <p className="hidden">
+    This P is using the global class <code>.hidden</code>
+  </p>
 </div>
 ```
 
@@ -85,10 +85,10 @@ export interface FSState
 
 ```tsx
 export interface MainAppProps extends RouteComponentProps {
-	match: any;
-	userInfo: UserInfo;
-	api: QFrameAPI;
-	apiPrefix: string;
+  match: any;
+  userInfo: UserInfo;
+  api: QFrameAPI;
+  apiPrefix: string;
 }
 ```
 
@@ -96,92 +96,104 @@ export interface MainAppProps extends RouteComponentProps {
 
 ```tsx
 export interface MainAppProps extends RouteComponentProps {
-	match: any;
-	userInfo: UserInfo;
-	api: QFrameAPI;
-	apiPrefix: string;
+  match: any;
+  userInfo: UserInfo;
+  api: QFrameAPI;
+  apiPrefix: string;
 }
 export interface TreeLink {
-	src: TreeLinkKey;
-	dst: TreeLinkKey;
-	srcPoint?: number[];
-	dstPoint?: number[];
-	color: { r: number; g: number; b: number };
+  src: TreeLinkKey;
+  dst: TreeLinkKey;
+  srcPoint?: number[];
+  dstPoint?: number[];
+  color: { r: number; g: number; b: number };
 }
 export interface SearchResult {
-	filename: string;
-	line: number;
-	snippet?: string;
-	hitType: number;
+  filename: string;
+  line: number;
+  snippet?: string;
+  hitType: number;
 }
 export interface FileTree {
-	count: number;
-	tree: FSDirEntry;
+  count: number;
+  tree: FSDirEntry;
 }
 export interface GoToTarget {
-	fsEntry: FSEntry;
-	line?: number;
-	col?: number;
+  fsEntry: FSEntry;
+  line?: number;
+  col?: number;
 }
 export interface FileContents {
-	content: ArrayBuffer;
-	path: string;
-	hash: string;
-	original?: ArrayBuffer;
+  content: ArrayBuffer;
+  path: string;
+  hash: string;
+  original?: ArrayBuffer;
 }
 export interface CommitFilter {
-	path?: string;
-	author?: string;
-	authorSearch?: string;
-	search?: string;
-	date?: string;
+  path?: string;
+  author?: string;
+  authorSearch?: string;
+  search?: string;
+  date?: string;
 }
 interface MainAppState {
-	commitFilter: CommitFilter;
-	searchQuery: string;
-	activeCommitData?: ActiveCommitData;
-	fileTree: FileTree;
-	commitLog: string;
-	commitChanges: string;
-	files: string;
-	searchResults: SearchResult[];
-	navigationTarget: string;
-	goToTarget?: GoToTarget;
-	frameRequestTime: number;
-	searchLinesRequest: number;
-	diffsLoaded: number;
-	fileContents?: FileContents;
-	links: TreeLink[];
-	dependencies: TreeLink[];
-	dependencySrcIndex: TreeLinkIndex;
-	dependencyDstIndex: TreeLinkIndex;
-	repoError: any;
-	commitData?: CommitData;
-	navUrl: string;
-	searchHover?: any;
-	treeLoaded: boolean;
-	fileTreeUpdated: number;
-	commitsVisible: boolean;
+  commitFilter: CommitFilter;
+  searchQuery: string;
+  activeCommitData?: ActiveCommitData;
+  fileTree: FileTree;
+  commitLog: string;
+  commitChanges: string;
+  files: string;
+  searchResults: SearchResult[];
+  navigationTarget: string;
+  goToTarget?: GoToTarget;
+  frameRequestTime: number;
+  searchLinesRequest: number;
+  diffsLoaded: number;
+  fileContents?: FileContents;
+  links: TreeLink[];
+  dependencies: TreeLink[];
+  dependencySrcIndex: TreeLinkIndex;
+  dependencyDstIndex: TreeLinkIndex;
+  repoError: any;
+  commitData?: CommitData;
+  navUrl: string;
+  searchHover?: any;
+  treeLoaded: boolean;
+  fileTreeUpdated: number;
+  commitsVisible: boolean;
 }
 export interface FSState extends MainAppState {
-	setCommitData: (commitData?: CommitData) => void;
-	setDependencies: (dependencies: TreeLink[]) => void;
-	setCommitFilter: (repo: string, commitFilter: CommitFilter) => void;
-	loadDiff: (repo: string, commit: Commit) => Promise<void>;
-	loadFile: (repo: string, hash: string, path: string) => Promise<void>;
-	loadFileDiff: (repo: string, hash: string, previousHash: string, path: string) => Promise<void>;
-	closeFile: () => void;
-	setCommitsVisible: (commitsVisible: boolean) => void;
-	setLinks: (links: TreeLink[]) => void;
-	addLinks: (links: TreeLink[]) => void;
-	setSearchQuery: (repo: string, branch: string, query: string) => void;
-	updateSearchLines: () => void;
-	setSearchHover: (el: HTMLElement, url: string) => void;
-	clearSearchHover: (el: HTMLElement) => void;
-	createRepo: (name: string, url?: string) => Promise<RepoInfo>;
-	renameRepo: (repo: RepoInfo, newName: string) => Promise<void>;
-	addTreeListener: (pattern: RegExp, callback: (fsEntry: FSEntry) => void) => void;
-	removeTreeListener: (pattern: RegExp, callback: (fsEntry: FSEntry) => void) => void;
+  requestFrame: () => void;
+  setCommitData: (commitData?: CommitData) => void;
+  setDependencies: (dependencies: TreeLink[]) => void;
+  setCommitFilter: (repo: string, commitFilter: CommitFilter) => void;
+  loadDiff: (repo: string, commit: Commit) => Promise<void>;
+  loadFile: (repo: string, hash: string, path: string) => Promise<void>;
+  loadFileDiff: (
+    repo: string,
+    hash: string,
+    previousHash: string,
+    path: string
+  ) => Promise<void>;
+  closeFile: () => void;
+  setCommitsVisible: (commitsVisible: boolean) => void;
+  setLinks: (links: TreeLink[]) => void;
+  addLinks: (links: TreeLink[]) => void;
+  setSearchQuery: (repo: string, branch: string, query: string) => void;
+  updateSearchLines: () => void;
+  setSearchHover: (el: HTMLElement, url: string) => void;
+  clearSearchHover: (el: HTMLElement) => void;
+  createRepo: (name: string, url?: string) => Promise<RepoInfo>;
+  renameRepo: (repo: RepoInfo, newName: string) => Promise<void>;
+  addTreeListener: (
+    pattern: RegExp,
+    callback: (fsEntry: FSEntry) => void
+  ) => void;
+  removeTreeListener: (
+    pattern: RegExp,
+    callback: (fsEntry: FSEntry) => void
+  ) => void;
 }
 ```
 
@@ -189,8 +201,8 @@ export interface FSState extends MainAppState {
 
 ```tsx
 declare global {
-	interface Navigator {
-		standalone?: boolean;
-	}
+  interface Navigator {
+    standalone?: boolean;
+  }
 }
 ```
