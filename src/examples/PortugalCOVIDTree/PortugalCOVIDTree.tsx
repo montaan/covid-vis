@@ -88,14 +88,9 @@ class CasesFilesystem extends Filesystem {
 					0.0,
 				];
 				nuts3Entry.color = [
-					(nuts3Entry.lastIndex > 0 ? 0.1 : 0) + Math.min(0.4, nuts3Entry.lastIndex / 1000),
+					(nuts3Entry.lastIndex > 0 ? 0.2 : 0) + Math.min(0.4, nuts3Entry.lastIndex / 1000),
 					Math.min(0.25, nuts3Entry.lastIndex / 1000),
 					0,
-				];
-				nuts2Entry.color = [
-					(nuts2Entry.lastIndex > 0 ? 0.2 : 0),
-					0,
-					(nuts2Entry.lastIndex > 0 ? 0.1 : 0),
 				];
 				for (let i = 0; i < population; i += populationBlockSize) {
 					const populationEntry = createDir(lauEntry, i.toString());

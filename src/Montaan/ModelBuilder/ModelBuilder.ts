@@ -319,7 +319,7 @@ export default class ModelBuilder {
 			const tree = buildQueue.take();
 			if (!tree || !tree.isDirectory) continue;
 			const forceLoadTree = forceLoads.has(tree);
-			if (fileIndex > 25000 && !forceLoadTree && tree !== centerEntry) continue;
+			if (fileIndex > 5000 && !forceLoadTree && tree !== centerEntry) continue;
 			fileIndex = this.layoutDir(
 				forceLoads,
 				camera,
