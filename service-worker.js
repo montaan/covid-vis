@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/covid-vis/precache-manifest.89ca2b6d106d0f7e8a96f30e9a41e09b.js"
+  "/covid-vis/precache-manifest.564de4e1080c1b7d4dc5a9f0b75d848d.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -35,7 +35,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/covid-vis/index.html"), {
   
-  blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
+  blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
 workbox.routing.registerRoute(
 	new RegExp('/_/(user/view|cards/(list|viewed|(view|vcard)/[a-f0-9-]+))$'),
