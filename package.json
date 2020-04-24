@@ -61,7 +61,7 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"deploy": "cd .. && yarn deploy",
-		"build": "react-app-rewired build && yarn sw-epilog && yarn imagemin && yarn brotli && yarn gzip",
+		"build": "react-app-rewired build && yarn sw-epilog",
 		"sw-epilog": "cat src/sw-epilog.js >> build/service-worker.js",
 		"brotli": "gulp brotli",
 		"gzip": "gulp gzip",
