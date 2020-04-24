@@ -34,18 +34,27 @@ export default class PeopleFilesystem extends Filesystem {
           for (
             let i = this.startIndex, l = this.startIndex + this.count, j = 0;
             i < l;
-            i += 10, j += 10
+            i += 10000, j += 10000
           ) {
             const tenEntry = createDir(tree, i.toString());
             tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
           }
         } else if (segments.length === 2) {
           for (
-            let i = parseInt(segments[1]),
+            let i = parseInt(segments[1]), l = this.startIndex + this.count, j = i - this.startIndex, k = 0;
+            i < l && k < 10000;
+            i += 100, j += 100, k += 100
+          ) {
+            const tenEntry = createDir(tree, i.toString());
+            tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
+          }
+        } else if (segments.length === 3) {
+          for (
+            let i = parseInt(segments[2]),
               l = this.startIndex + this.count,
               j = i - this.startIndex,
               k = 0;
-            i < l && k < 10;
+            i < l && k < 100;
             i++, j++, k++
           ) {
             const personEntry = createFile(tree, i.toString());
