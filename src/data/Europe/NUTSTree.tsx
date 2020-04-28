@@ -13,7 +13,7 @@ export class NUTSFilesystem extends Filesystem {
 
         let population = 0;
 
-        for (const area in NUTS) {
+        for (const area in LAUbyNUTS3) {
             if (/^EU|EF/.test(area)) continue;
             let tree = this.mountPoint;
             tree = getOrCreateDir(tree, (NUTSNames as any)[area.slice(0,2)] || area.slice(0,2));
@@ -24,14 +24,15 @@ export class NUTSFilesystem extends Filesystem {
             if (area.length < 4) continue;
             tree = getOrCreateDir(tree, (NUTSNames as any)[area.slice(0,4)] || area.slice(0,4));
             tree.fetched = true;
-            if (area.length < 5) continue;
-            tree = getOrCreateDir(tree, (NUTSNames as any)[area.slice(0,5)] || area.slice(0,5));
+            if (area.length >= 5) {
+                tree = getOrCreateDir(tree, (NUTSNames as any)[area.slice(0,5)] || area.slice(0,5));
+            }
             const laus = (LAUbyNUTS3 as any)[area];
             if (laus) {
                 tree.fetched = true;
-                for (const lau in laus) {
-                    const lauObj = laus[lau];
-                    const lauTree = getOrCreateDir(tree, lauObj.latinName);
+                for (let j = 0; j < laus.length; j++) {
+                    const lauObj = laus[j];
+                    const lauTree = getOrCreateDir(tree, lauObj.name);
                     lauTree.filesystem = new PeopleFilesystem(population, parseInt(lauObj.population), 0, 1);
                     population += parseInt(lauObj.population);
                 }
@@ -41,6 +42,7 @@ export class NUTSFilesystem extends Filesystem {
                     tree.fetched = true;
                     continue;
                 }
+                tree.fetched = false;
                 tree.filesystem = new PeopleFilesystem(population, pop, 0, 1);
                 population += pop;
             }

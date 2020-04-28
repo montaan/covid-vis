@@ -13,10 +13,11 @@ for (let i = 0; i < lines.length; i++) {
     const code = fields[1];
     const name = fields[2].replace(/"/g, '');
     const latinName = (fields[3] || name).replace(/"/g, '');
-    const population = parseInt(fields[5]);
+    const population = parseInt(fields[5].replace(/[",]/g, ''));
     if (isNaN(population)) continue;
-    const laus = (LAU[NUTS3code] = LAU[NUTS3code] || {});
-    laus[code] = { name, latinName, population };
+    const laus = (LAU[NUTS3code] = LAU[NUTS3code] || []);
+    laus.push({ code, name, latinName, population });
 }
+Object.keys(LAU).forEach(k => LAU[k].sort((a,b) => a.name.localeCompare(b.name)));
 
 fs.writeFileSync('LAUbyNUTS3.json', JSON.stringify(LAU));

@@ -15,8 +15,8 @@ import Geometry from '../Geometry/Geometry';
 import TextFileView from '../FileViews/TextFileView/TextFileView';
 import ImageFileView from '../FileViews/ImageFileView/ImageFileView';
 
-import fontDescription from './assets/fnt/Inconsolata-Regular.fnt';
-import fontSDF from './assets/fnt/Inconsolata-Regular.png';
+import fontDescription from './assets/fnt/DejaVuSansMono.fnt';
+import fontSDF from './assets/fnt/DejaVuSansMono.png';
 
 // import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import * as THREE from 'three';
