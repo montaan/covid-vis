@@ -34,7 +34,7 @@ export default class PeopleFilesystem extends Filesystem {
           for (
             let i = this.startIndex, l = this.startIndex + this.count, j = 0;
             i < l;
-            i += 10000, j += 10000
+            i += 100000000, j += 100000000
           ) {
             const tenEntry = createDir(tree, i.toString());
             tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
@@ -42,15 +42,33 @@ export default class PeopleFilesystem extends Filesystem {
         } else if (segments.length === 2) {
           for (
             let i = parseInt(segments[1]), l = this.startIndex + this.count, j = i - this.startIndex, k = 0;
-            i < l && k < 10000;
-            i += 100, j += 100, k += 100
+            i < l && k < 100000000;
+            i += 1000000, j += 1000000, k += 1000000
           ) {
             const tenEntry = createDir(tree, i.toString());
             tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
           }
         } else if (segments.length === 3) {
           for (
-            let i = parseInt(segments[2]),
+            let i = parseInt(segments[2]), l = this.startIndex + this.count, j = i - this.startIndex, k = 0;
+            i < l && k < 1000000;
+            i += 10000, j += 10000, k += 10000
+          ) {
+            const tenEntry = createDir(tree, i.toString());
+            tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
+          }
+        } else if (segments.length === 4) {
+          for (
+            let i = parseInt(segments[3]), l = this.startIndex + this.count, j = i - this.startIndex, k = 0;
+            i < l && k < 10000;
+            i += 100, j += 100, k += 100
+          ) {
+            const tenEntry = createDir(tree, i.toString());
+            tenEntry.color = j < this.covidCount ? [0.5, 0, 0] : [0, 0, 0];
+          }
+        } else if (segments.length === 5) {
+          for (
+            let i = parseInt(segments[4]),
               l = this.startIndex + this.count,
               j = i - this.startIndex,
               k = 0;
