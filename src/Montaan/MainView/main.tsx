@@ -661,7 +661,7 @@ export class Tabletree {
 		var fsPoint = new THREE.Vector3(
 			fsEntry.x + fsEntry.scale * (fsEntry.isDirectory ? 0.5 : 0.5),
 			fsEntry.y + fsEntry.scale * (fsEntry.isDirectory ? 0.75 : 0.5),
-			fsEntry.z + fsEntry.scale * (fsEntry.isDirectory ? 3 : 5)
+			fsEntry.z + fsEntry.scale * (fsEntry.isDirectory ? 3 : 5) * 2 / camera.aspect
 		);
 		fsPoint.applyMatrix4(model.matrixWorld);
 		camera.targetPosition.copy(fsPoint);
