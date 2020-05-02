@@ -319,7 +319,7 @@ export default class ModelBuilder {
 			const tree = buildQueue.take();
 			if (!tree || !tree.isDirectory) continue;
 			const forceLoadTree = forceLoads.has(tree);
-			if (fileIndex > 2500 && !forceLoadTree && tree !== centerEntry) continue;
+			if (fileIndex > 5000 && !forceLoadTree && tree !== centerEntry) continue;
 			fileIndex = this.layoutDir(
 				forceLoads,
 				camera,
@@ -339,7 +339,7 @@ export default class ModelBuilder {
 
 				const bbox = fsEntry.bbox;
 				const pxWidth = bbox.width * viewWidth * 0.5;
-				let isSmall = pxWidth < 15;
+				let isSmall = pxWidth < 5;
 				if (!isSmall && !fsEntry.isDirectory) {
 					isSmall = pxWidth < 128;
 					if (!isSmall && /\.(jpe?g|png)$/i.test(fsEntry.title)) {
@@ -360,7 +360,7 @@ export default class ModelBuilder {
 					// Descend into directories.
 					buildQueue.add(fsEntry);
 					// Fetch directories that haven't been fetched yet.
-					if ((forceLoadFSEntry || pxWidth > 15) && !fsEntry.fetched) {
+					if ((forceLoadFSEntry || pxWidth > 5) && !fsEntry.fetched) {
 						entriesToFetchQueue.add(fsEntry);
 					}
 				} else if (!isSmall) {

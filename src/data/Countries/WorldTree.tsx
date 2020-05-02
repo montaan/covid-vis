@@ -12,36 +12,37 @@ export class WorldFilesystem extends Filesystem {
 
         let population = 0;
 
-        for (const country in Countries) {
-            let tree = this.mountPoint;
+        Object.keys(Countries).sort().forEach(country => {
+            let tree = mountPoint;
             tree = getOrCreateDir(tree, country);
             const pop = (Countries as any)[country];
             if (isNaN(pop)) {
                 tree.fetched = true;
-                continue;
+                return;
             }
             const cases = (CountryCases as any)[country];
             const caseCount = Math.max(0, (cases && cases[0]) || 0);
             const deaths = Math.max(0, (cases && cases[1]) || 0);
             const recovered = Math.max(0, (cases && cases[2]) || 0);
-            const completion = (deaths + recovered) / Math.max(1, caseCount);
-            console.log(country, deaths, caseCount, deaths / Math.max(1, caseCount), deaths / Math.max(1, caseCount) / 0.013, completion);
-            tree.filesystem = new PeopleFilesystem(population, pop, caseCount, deaths / Math.max(1, caseCount) / 0.013);
+            const completionRatio = (deaths + recovered) / Math.max(1, caseCount);
+            const caseMultiplier = deaths / Math.max(1, caseCount) / 0.013;
+            let completion = Math.round(100*completionRatio) + '%';
+            tree.filesystem = new PeopleFilesystem(population, pop, caseCount, caseMultiplier);
             population += pop;
+            tree.title = `${tree.name} ${completion}`
             tree.color = [
                 (caseCount > 0 ? 0.1 : 0) +
-                Math.min(0.4, (100 * caseCount) / pop),
+                Math.min(0.4, (100 * caseCount * caseMultiplier) / pop),
                 caseCount <= 0
-                ? 0.2
+                ? 0.4
                 : 0 +
                     Math.max(
                     0,
-                    Math.min(0.1, 1 - (100 * caseCount) / pop)
+                    Math.min(0.1, 1 - (100 * caseCount * caseMultiplier) / pop)
                     ),
-                0.0
+                completionRatio**2
             ];
-            tree.title = `${country} (${caseCount.toLocaleString()} / ${pop.toLocaleString()})`
-        }
+        });
         console.log("World population", population);
     }
 }

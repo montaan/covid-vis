@@ -63,17 +63,18 @@ export default class CasesFilesystem extends Filesystem {
     const tree = new FSDirEntry("");
     const cases = this.COVIDCases.get(date);
     if (!cases) return tree;
-    const dayCases = new Map<string, { cases: number; deaths: number }>(
+    const dayCases = new Map<string, { cases: number; deaths: number, recovered: number, hospitalized: number }>(
       cases.entries()
     );
-    const caseList: string[] = [];
-    let populationCounter = 0;
-    const populationBlockSize = 1000;
-    for (let region of this.Regions.entries()) {
+    for (const region of this.Regions.entries()) {
       const lauName = region[0];
       const population = region[1];
       const covidCounts = dayCases.get(lauName);
-      let covidCount = covidCounts ? covidCounts.cases : 0;
+      const covidCount = Math.max(0, covidCounts ? covidCounts.cases : 0);
+      const deaths = Math.max(0, covidCounts ? covidCounts.deaths : 0);
+      const regionMultiplier = deaths ? deaths / covidCount / 0.013 : this.caseMultiplier;
+      const completionRatio = (deaths + (covidCounts?.recovered || 0)) / covidCount;
+      let completion = (covidCounts && covidCounts.recovered && covidCounts.recovered > 0) ? Math.round(100*completionRatio) + '%' : '-';
       if (covidCount > population) {
         throw new Error("More cases than people");
       }
@@ -81,50 +82,28 @@ export default class CasesFilesystem extends Filesystem {
         dayCases.delete(lauName);
       }
       const lauEntry = createDir(tree, lauName.replace(/\//g, "|"));
+      lauEntry.title = `${lauEntry.name} ${completion}`;
       if (lauEntry.lastIndex < 0) lauEntry.lastIndex = 0;
       lauEntry.lastIndex += covidCount;
       lauEntry.color = [
-        (lauEntry.lastIndex > 0 ? 0.1 : 0) +
-          Math.min(0.4, (100 * lauEntry.lastIndex) / population),
-        lauEntry.lastIndex <= 0
-          ? 0.2
+          (covidCount > 0 ? 0.1 : 0) +
+          Math.min(0.4, (100 * covidCount * regionMultiplier) / population),
+          covidCount <= 0
+          ? 0.4
           : 0 +
-            Math.max(
+              Math.max(
               0,
-              Math.min(0.1, 1 - (100 * lauEntry.lastIndex) / population)
-            ),
-        0.0
+              Math.min(0.1, 1 - (100 * covidCount * regionMultiplier) / population)
+              ),
+          0.5 * completionRatio**2
       ];
-      lauEntry.title = `${lauEntry.name} ${Math.floor(
-        lauEntry.lastIndex
-      )}/${population} ${Math.floor((10000 * lauEntry.lastIndex) / population) /
-        100}%`;
-      for (let i = 0; i < population; i += populationBlockSize) {
-        const populationEntry = createDir(lauEntry, i.toString());
-        populationEntry.color = [
-          (covidCount > 0 ? 0.2 : 0) +
-            0.5 * Math.min(populationBlockSize, covidCount) * 0.01,
-          0.0,
-          0.0
-        ];
-        populationEntry.filesystem = new PeopleFilesystem(
-          populationCounter,
-          Math.min(populationBlockSize, population - i),
-          covidCount,
-          this.caseMultiplier
-        );
-        populationEntry.filesystem.mountPoint = populationEntry;
-        // addCasesToCaseList(
-        // 	caseList,
-        // 	getFullPath(populationEntry),
-        // 	populationCounter,
-        // 	Math.min(populationBlockSize, covidCount)
-        // );
-        covidCount -= populationBlockSize;
-        covidCount = Math.max(0, covidCount);
-
-        populationCounter += Math.min(populationBlockSize, population - i);
-      }
+      lauEntry.filesystem = new PeopleFilesystem(
+        0,
+        population,
+        covidCount,
+        this.caseMultiplier
+      );
+      lauEntry.filesystem.mountPoint = lauEntry;
     }
     utils.traverseFSEntry(
       tree,

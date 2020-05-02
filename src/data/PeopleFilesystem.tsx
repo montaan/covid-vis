@@ -22,8 +22,9 @@ export default class PeopleFilesystem extends Filesystem {
 
 	dirColor(start: number, count: number) {
 		const remainingCases = this.covidCount - start;
+    const remainingCount = Math.min(this.count - start, count);
 		const blockCases = Math.min(count, remainingCases);
-		const caseFraction = blockCases / count;
+		const caseFraction = blockCases / remainingCount;
 
 		if (caseFraction > 0) {
 			return [
@@ -35,7 +36,7 @@ export default class PeopleFilesystem extends Filesystem {
 
 		const estimatedRemainingCases = this.covidCount * this.caseMultiplier - start;
 		const estimatedBlockCases = Math.min(count, estimatedRemainingCases);
-		const estimatedCaseFraction = estimatedBlockCases / count;
+		const estimatedCaseFraction = estimatedBlockCases / remainingCount;
 
     if (estimatedCaseFraction > 0) {
 			return [0.2, 0.2, 0.0];
@@ -43,6 +44,13 @@ export default class PeopleFilesystem extends Filesystem {
 
     return [0, 0, 0];
 	}
+
+  getTitle(start: number, count: number) {
+		const remainingCases = this.covidCount - start;
+		const blockCases = Math.max(0, Math.min(count, remainingCases));
+    const remainingCount = Math.min(this.count - start, count);
+    return `${blockCases.toLocaleString()} / ${remainingCount.toLocaleString()}`
+  }
 
 	async readDir(path: string): Promise<FSDirEntry | null> {
 		return new Promise((resolve, reject) => {
@@ -56,6 +64,7 @@ export default class PeopleFilesystem extends Filesystem {
 						i += 100000000, j += 100000000
 					) {
 						const tenEntry = createDir(tree, i.toString());
+            tenEntry.title = this.getTitle(j, 100000000);
 						tenEntry.color = this.dirColor(j, 100000000);
 					}
 				} else if (segments.length === 2) {
@@ -68,6 +77,7 @@ export default class PeopleFilesystem extends Filesystem {
 						i += 1000000, j += 1000000, k += 1000000
 					) {
 						const tenEntry = createDir(tree, i.toString());
+            tenEntry.title = this.getTitle(j, 1000000);
 						tenEntry.color = this.dirColor(j, 1000000);
 					}
 				} else if (segments.length === 3) {
@@ -80,6 +90,7 @@ export default class PeopleFilesystem extends Filesystem {
 						i += 10000, j += 10000, k += 10000
 					) {
 						const tenEntry = createDir(tree, i.toString());
+            tenEntry.title = this.getTitle(j, 10000);
 						tenEntry.color = this.dirColor(j, 10000);
 					}
 				} else if (segments.length === 4) {
@@ -92,6 +103,7 @@ export default class PeopleFilesystem extends Filesystem {
 						i += 100, j += 100, k += 100
 					) {
 						const tenEntry = createDir(tree, i.toString());
+            tenEntry.title = this.getTitle(j, 100);
 						tenEntry.color = this.dirColor(j, 100);
 					}
 				} else if (segments.length === 5) {

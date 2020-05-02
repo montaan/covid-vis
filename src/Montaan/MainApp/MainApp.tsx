@@ -38,6 +38,7 @@ import {
 import PortugalCOVIDTree from "../../data/Portugal";
 import { SwedenCOVIDTree } from "../../data/Sweden";
 import { COVIDTree as FinlandCOVIDTree } from "../../data/Finland";
+import { COVIDTree as UnitedStatesCOVIDTree } from "../../data/UnitedStates";
 import NUTSTree from "../../data/Europe/NUTSTree";
 import WorldTree from "../../data/Countries/WorldTree";
 
@@ -261,11 +262,12 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
     (window as any).mountURL = this.mountURL;
     setTimeout(() => {
 		this.mountFSEntry("/", "World", WorldTree);
+		// this.mountFSEntry("/World", "United States", UnitedStatesCOVIDTree);
 		// this.mountFSEntry("/", "Europe", NUTSTree);
-		// const Europe = getOrCreateDir(this.state.fileTree.tree, "Europe");
-		// this.mountFSEntry("/Europe", "Portugal", PortugalCOVIDTree);
-		// this.mountFSEntry("/Europe", "Sweden", SwedenCOVIDTree);
-		// this.mountFSEntry("/Europe", "Finland", FinlandCOVIDTree);
+		// const Europe = getOrCreateDir(this.state.fileTree.tree.entries.get("World"), "Europe");
+		// this.mountFSEntry("/World/Europe", "Portugal", PortugalCOVIDTree);
+		// this.mountFSEntry("/World/Europe", "Sweden", SwedenCOVIDTree);
+		// this.mountFSEntry("/World/Europe", "Finland", FinlandCOVIDTree);
     }, 100);
   }
 

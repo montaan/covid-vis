@@ -141,7 +141,7 @@ export const Countries = {
 "Jamaica": 2726667,
 "Moldova": 2681735,
 "Namibia": 2458936,
-"Gambia": 2347706,
+"The Gambia": 2347706,
 "Botswana": 2338851,
 "Gabon": 2172579,
 "Slovenia": 2094060,
