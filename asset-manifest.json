@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/covid-vis/static/css/main.7dae137c.chunk.css",
-    "main.js": "/covid-vis/static/js/main.3786569b.chunk.js",
-    "main.js.map": "/covid-vis/static/js/main.3786569b.chunk.js.map",
+    "main.css": "/covid-vis/static/css/main.765601b1.chunk.css",
+    "main.js": "/covid-vis/static/js/main.39d8197e.chunk.js",
+    "main.js.map": "/covid-vis/static/js/main.39d8197e.chunk.js.map",
     "runtime~main.js": "/covid-vis/static/js/runtime~main.3460a7dd.js",
     "runtime~main.js.map": "/covid-vis/static/js/runtime~main.3460a7dd.js.map",
     "static/css/2.67123b20.chunk.css": "/covid-vis/static/css/2.67123b20.chunk.css",
-    "static/js/2.f5754639.chunk.js": "/covid-vis/static/js/2.f5754639.chunk.js",
-    "static/js/2.f5754639.chunk.js.map": "/covid-vis/static/js/2.f5754639.chunk.js.map",
+    "static/js/2.ea059289.chunk.js": "/covid-vis/static/js/2.ea059289.chunk.js",
+    "static/js/2.ea059289.chunk.js.map": "/covid-vis/static/js/2.ea059289.chunk.js.map",
     "bd572d15f24caa569fe7.worker.js": "/covid-vis/bd572d15f24caa569fe7.worker.js",
     "bd572d15f24caa569fe7.worker.js.map": "/covid-vis/bd572d15f24caa569fe7.worker.js.map",
     "index.html": "/covid-vis/index.html",
-    "precache-manifest.564de4e1080c1b7d4dc5a9f0b75d848d.js": "/covid-vis/precache-manifest.564de4e1080c1b7d4dc5a9f0b75d848d.js",
+    "precache-manifest.25303b621de13a7ea75caedfdb194385.js": "/covid-vis/precache-manifest.25303b621de13a7ea75caedfdb194385.js",
     "service-worker.js": "/covid-vis/service-worker.js",
     "static/css/2.67123b20.chunk.css.map": "/covid-vis/static/css/2.67123b20.chunk.css.map",
-    "static/css/main.7dae137c.chunk.css.map": "/covid-vis/static/css/main.7dae137c.chunk.css.map",
-    "static/media/Inconsolata-Regular.fnt": "/covid-vis/static/media/Inconsolata-Regular.bb6aa359.fnt",
-    "static/media/Inconsolata-Regular.png": "/covid-vis/static/media/Inconsolata-Regular.eef1a52f.png"
+    "static/css/main.765601b1.chunk.css.map": "/covid-vis/static/css/main.765601b1.chunk.css.map",
+    "static/media/DejaVuSansMono.fnt": "/covid-vis/static/media/DejaVuSansMono.4ba93136.fnt",
+    "static/media/DejaVuSansMono.png": "/covid-vis/static/media/DejaVuSansMono.8b401df4.png"
   }
 }
