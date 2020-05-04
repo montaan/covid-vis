@@ -73,7 +73,9 @@ export default class CasesFilesystem extends Filesystem {
       const covidCount = Math.max(0, covidCounts ? covidCounts.cases : 0);
       const deaths = Math.max(0, covidCounts ? covidCounts.deaths : 0);
       const regionMultiplier = deaths ? deaths / covidCount / 0.013 : this.caseMultiplier;
-      const completionRatio = (deaths + (covidCounts?.recovered || 0)) / covidCount;
+      const resolved = deaths + (covidCounts?.recovered || 0);
+      const completionRatio = resolved / covidCount;
+      const unresolved = covidCount - resolved;
       let completion = (covidCounts && covidCounts.recovered && covidCounts.recovered > 0) ? Math.round(100*completionRatio) + '%' : '-';
       if (covidCount > population) {
         throw new Error("More cases than people");
@@ -87,13 +89,13 @@ export default class CasesFilesystem extends Filesystem {
       lauEntry.lastIndex += covidCount;
       lauEntry.color = [
           (covidCount > 0 ? 0.1 : 0) +
-          Math.min(0.4, (100 * covidCount * regionMultiplier) / population),
+          Math.min(0.4, (100 * unresolved * regionMultiplier) / population),
           covidCount <= 0
           ? 0.4
           : 0 +
               Math.max(
               0,
-              Math.min(0.1, 1 - (100 * covidCount * regionMultiplier) / population)
+              Math.min(0.1, 1 - (100 * unresolved * regionMultiplier) / population)
               ),
           0.5 * completionRatio**2
       ];
