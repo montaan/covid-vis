@@ -10,6 +10,8 @@ import { SwedenCOVIDTree } from "../Sweden";
 import { COVIDTree as FinlandCOVIDTree } from "../Finland";
 import { COVIDTree as UnitedStatesCOVIDTree } from "../UnitedStates";
 
+// import NUTSTree from "../../data/Europe/NUTSTree";
+
 const countryDetails = {
     Portugal: PortugalCOVIDTree,
     Sweden: SwedenCOVIDTree,
@@ -84,10 +86,7 @@ export class WorldFilesystem extends Filesystem {
                 const countryTree = (countryDetails as any)[country];
                 countryTree.title = `${unresolved.toLocaleString()} / ${pop.toLocaleString()}`;
                 tree.filesystem.readDir('/0').then(dir => {
-                    console.log(dir);
-                    if (dir) {
-                        countryTree.color = dir.entries.get('0')?.color;
-                    }
+                    if (dir) countryTree.color = dir.entries.get('0')?.color;
                 });
                 tree.entries.set('0', countryTree);
                 countryTree.parent = tree;

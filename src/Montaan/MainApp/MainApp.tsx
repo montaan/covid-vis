@@ -21,8 +21,7 @@ import {
   FSDirEntry,
   Filesystem,
   mount,
-  readThumbnails,
-  getOrCreateDir
+  readThumbnails
 } from "../Filesystems";
 
 import styles from "./MainApp.module.scss";
@@ -35,11 +34,6 @@ import {
   MontaanUserReposFilesystem,
   RepoInfo
 } from "../Filesystems/MontaanUserReposFilesystem";
-import PortugalCOVIDTree from "../../data/Portugal";
-import { SwedenCOVIDTree } from "../../data/Sweden";
-import { COVIDTree as FinlandCOVIDTree } from "../../data/Finland";
-import { COVIDTree as UnitedStatesCOVIDTree } from "../../data/UnitedStates";
-import NUTSTree from "../../data/Europe/NUTSTree";
 import WorldTree from "../../data/Countries/WorldTree";
 
 registerFileSystem("montaanGit", MontaanGitFilesystem);
@@ -261,13 +255,7 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
     (window as any).mount = this.mount;
     (window as any).mountURL = this.mountURL;
     setTimeout(() => {
-		this.mountFSEntry("/", "World", WorldTree);
-		// this.mountFSEntry("/World", "United States", UnitedStatesCOVIDTree);
-		// this.mountFSEntry("/", "Europe", NUTSTree);
-		// const Europe = getOrCreateDir(this.state.fileTree.tree.entries.get("World"), "Europe");
-		// this.mountFSEntry("/World/Europe", "Portugal", PortugalCOVIDTree);
-		// this.mountFSEntry("/World/Europe", "Sweden", SwedenCOVIDTree);
-		// this.mountFSEntry("/World/Europe", "Finland", FinlandCOVIDTree);
+  		this.mountFSEntry("/", "World", WorldTree);
     }, 100);
   }
 
