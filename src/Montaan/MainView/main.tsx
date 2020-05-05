@@ -31,10 +31,6 @@ import SearchLandmarks from '../SearchLandmarks/SearchLandmarks';
 import LinksModel from '../LinksModel/LinksModel';
 import { RouteComponentProps } from 'react-router-dom';
 import FileView from '../FileViews';
-// import * as Comlink from 'comlink';
-
-// /* eslint-disable import/no-webpack-loader-syntax */
-// import ModelBuilderWorker from 'worker-loader!../ModelBuilder/ModelBuilder';
 
 // function save(blob: Blob, filename: string) {
 // 	const link = document.createElement('a');
@@ -368,7 +364,7 @@ export class Tabletree {
 		set.add(entry);
 	}
 
-	showFileTree(tree: FileTree, force: boolean = false) {
+	async showFileTree(tree: FileTree, force: boolean = false) {
 		if ((this.treeBuildInProgress || this.treeVersion === this.treeBuildVersion) && !force) {
 			return;
 		}
@@ -416,7 +412,7 @@ export class Tabletree {
 			boundingBox,
 			boundingSphere,
 			thumbnailsToFetch,
-		} = this.modelBuilder.buildModel(tree, this.camera, this.model, forceLoads);
+		} = await this.modelBuilder.buildModel(tree, this.camera, this.model, forceLoads);
 		this.zoomedInPath = getFullPath(smallestCovering);
 		this.fsIndex = fsEntryIndex;
 		this.smallestCovering = smallestCovering;
@@ -1122,9 +1118,10 @@ export class Tabletree {
 		const { scene, camera, renderer } = this;
 
 		if (this.tree) this.showFileTree(this.tree, true);
-		this.searchLandmarks.updateSearchLines();
-		this.linksModel.updateLinks(this.currentFrame);
-		if (this.fileTree) {
+		// Workerize these as well
+		if (this.fileTree && this.model.geometry.attributes.color) {
+			this.searchLandmarks.updateSearchLines();
+			this.linksModel.updateLinks(this.currentFrame);
 			this.highlightedLines.highlightResults(
 				this.fileTree,
 				this.searchResults,
