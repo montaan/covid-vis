@@ -1,16 +1,18 @@
-import './css/main.css';
-import './css/ColorsDark.css';
+import Theme from './themes/Dark';
 
 import * as THREE from 'three';
 import { FSEntry } from '../Filesystems';
 
-type ColorArray = number[];
+export type ColorArray = number[];
 
 interface THREEColors {
 	[propType: string]: THREE.Color;
 }
 
-interface FileColors {
+export interface FileColors {
+	text: ColorArray;
+	background: ColorArray;
+
 	musicFile: ColorArray;
 	configFile: ColorArray;
 	imageFile: ColorArray;
@@ -50,6 +52,9 @@ interface FileColors {
 
 const Colors = {
 	colors: {
+		text: [0,0,0],
+		background: [1,1,1],
+
 		musicFile: [1, 0, 1],
 		configFile: [1, 0, 1],
 		imageFile: [1, 0, 1],
@@ -218,8 +223,6 @@ const Colors = {
 	},
 
 	parseColors: function() {
-		const div = document.createElement('div');
-		document.body.appendChild(div);
 		const types: (keyof FileColors)[] = [
 			'musicDir',
 			'imageDir',
@@ -252,39 +255,16 @@ const Colors = {
 			'actionRFile',
 			'actionDFile',
 		];
-		const ec = 'rgb(255,0,255)';
 		types.forEach((t) => {
-			div.className = t;
-			const color = getComputedStyle(div).color || ec;
-			// eslint-disable-next-line
-			const [_, r, g, b] = color.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/) || [];
-			this.colors[t] = [parseInt(r) / 255, parseInt(g) / 255, parseInt(b) / 255];
+			this.colors[t] = Theme[t].slice(0,3).map((c:number) => c/255);
 		});
-		document.body.removeChild(div);
 
-		var bodyStyle = getComputedStyle(document.body);
-
-		{
-			// eslint-disable-next-line
-			const [_, r, g, b] =
-				(bodyStyle.color || ec).match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/) || [];
-			this.textColor = new THREE.Color(
-				parseInt(r) / 255,
-				parseInt(g) / 255,
-				parseInt(b) / 255
-			);
-		}
-
-		{
-			// eslint-disable-next-line
-			const [_, r, g, b] =
-				(bodyStyle.backgroundColor || ec).match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/) || [];
-			this.backgroundColor = new THREE.Color(
-				parseInt(r) / 255,
-				parseInt(g) / 255,
-				parseInt(b) / 255
-			);
-		}
+		this.textColor.r = Theme.text[0] / 255;
+		this.textColor.g = Theme.text[1] / 255;
+		this.textColor.b = Theme.text[2] / 255;
+		this.backgroundColor.r = Theme.background[0] / 255;
+		this.backgroundColor.g = Theme.background[1] / 255;
+		this.backgroundColor.b = Theme.background[2] / 255;
 	},
 };
 
